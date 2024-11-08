@@ -1,1 +1,11 @@
 # Job-Scheduler-design-and-implemention-
+This project simulates a job scheduling system for a supercomputer that consists of a master scheduler node and 128 worker nodes. Each worker node is equipped with 24 cores and 64 GB of RAM. The master scheduler is responsible for managing job allocations based on specific resource requirements and queuing policies. For each day of operation, average CPU and memory utilization metrics are recorded in a CSV file for later analysis and visualization.
+
+The system organizes jobs arriving at the master node into a queue using one of three policies. The First Come First Serve (FCFS) policy schedules jobs in their order of arrival, the Smallest Job First policy prioritizes jobs with smaller overall resource requirements (calculated as execution time × CPU requirement × memory), and the Shortest Duration First policy gives preference to jobs with shorter execution times. Once queued, jobs are allocated to available worker nodes based on the requested resources, following specific allocation strategies: First Fit (assigning the first node with adequate resources), Best Fit (assigning the node that most closely matches the resource needs), or Worst Fit (assigning the node with the maximum resources available to balance the load).
+
+After processing each job, the scheduler calculates daily average resource usage, saving the data in scheduling_metrics.csv. This CSV file allows for easy import into analysis tools to generate visual insights, such as bar charts, on CPU and memory utilization across different queuing and allocation policies.
+
+To set up and run the project, a C++ compiler (e.g., GCC) is required. Compile the project using g++ -o JobScheduler JobScheduler.cpp and run it with ./JobScheduler. The JobArrival.txt file should be in the same directory, as it contains essential job data such as arrival time, memory, CPU requirements, and execution duration. This input file guides the scheduling process, enabling the program to allocate resources effectively.
+
+For analysis, scheduling_metrics.csv can be imported into Microsoft Excel, Power BI or Google Colab using python. Here, charts can be created to compare CPU and memory utilization across different queuing and node allocation strategies, providing insights into the efficiency of each policy combination.
+
